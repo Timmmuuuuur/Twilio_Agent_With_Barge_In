@@ -1,0 +1,86 @@
+{
+  "input": {
+    "type": "object",
+    "properties": {
+      "patient": {
+        "type": "object",
+        "properties": {
+          "first": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Patient first name"
+          },
+          "last": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Patient last name"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^\\+[1-9]\\d{1,14}$",
+            "description": "Phone number in E.164 format (e.g., +14085551234)"
+          }
+        },
+        "required": ["first", "last", "phone"],
+        "additionalProperties": false
+      },
+      "provider_id": {
+        "type": "string",
+        "description": "Provider identifier"
+      },
+      "slot": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Appointment start time (ISO 8601)"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Appointment end time (ISO 8601)"
+          }
+        },
+        "required": ["start", "end"],
+        "additionalProperties": false
+      },
+      "appointment_type": {
+        "type": "string",
+        "enum": ["cleaning", "checkup", "filling", "root_canal", "extraction", "consultation"],
+        "description": "Type of appointment"
+      },
+      "location_id": {
+        "type": "string",
+        "description": "Location/office identifier"
+      },
+      "idempotency_key": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Unique key for idempotent booking"
+      }
+    },
+    "required": ["patient", "slot", "appointment_type", "location_id", "idempotency_key"],
+    "additionalProperties": false
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "confirmation_id": {
+        "type": "string",
+        "description": "Booking confirmation ID"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["booked", "failed"],
+        "description": "Booking status"
+      },
+      "reason": {
+        "type": "string",
+        "description": "Failure reason if status is 'failed'"
+      }
+    },
+    "required": ["confirmation_id", "status"],
+    "additionalProperties": false
+  }
+}

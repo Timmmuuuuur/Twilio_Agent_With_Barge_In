@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/multimodal/index.ts"],"sourcesContent":["// SPDX-FileCopyrightText: 2024 LiveKit, Inc.\n//\n// SPDX-License-Identifier: Apache-2.0\nexport * from './multimodal_agent.js';\nexport * from './agent_playout.js';\n"],"mappings":"AAGA,cAAc;AACd,cAAc;","names":[]}

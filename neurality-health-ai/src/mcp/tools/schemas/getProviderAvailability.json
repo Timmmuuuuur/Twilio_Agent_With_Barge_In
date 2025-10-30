@@ -1,0 +1,70 @@
+{
+  "input": {
+    "type": "object",
+    "properties": {
+      "location_id": {
+        "type": "string",
+        "description": "Location/office identifier (e.g., 'sj-001', 'sf-downtown')"
+      },
+      "provider_id": {
+        "type": "string",
+        "description": "Provider identifier (optional, any available if omitted)"
+      },
+      "date_range": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start of availability window (ISO 8601)"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "End of availability window (ISO 8601)"
+          }
+        },
+        "required": ["start", "end"],
+        "additionalProperties": false
+      },
+      "appointment_type": {
+        "type": "string",
+        "enum": ["cleaning", "checkup", "filling", "root_canal", "extraction", "consultation"],
+        "description": "Type of appointment"
+      }
+    },
+    "required": ["location_id", "date_range", "appointment_type"],
+    "additionalProperties": false
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "slots": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Slot start time (ISO 8601)"
+            },
+            "end": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Slot end time (ISO 8601)"
+            },
+            "provider_id": {
+              "type": "string",
+              "description": "Assigned provider ID"
+            }
+          },
+          "required": ["start", "end"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["slots"],
+    "additionalProperties": false
+  }
+}

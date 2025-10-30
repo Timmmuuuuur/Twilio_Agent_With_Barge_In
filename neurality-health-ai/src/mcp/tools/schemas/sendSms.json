@@ -1,0 +1,35 @@
+{
+  "input": {
+    "type": "object",
+    "properties": {
+      "to": {
+        "type": "string",
+        "pattern": "^\\+[1-9]\\d{1,14}$",
+        "description": "Recipient phone number in E.164 format (e.g., +14085551234)"
+      },
+      "message": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1600,
+        "description": "SMS message body"
+      }
+    },
+    "required": ["to", "message"],
+    "additionalProperties": false
+  },
+  "output": {
+    "type": "object",
+    "properties": {
+      "queued": {
+        "type": "boolean",
+        "description": "Whether the SMS was successfully queued"
+      },
+      "message_id": {
+        "type": "string",
+        "description": "SMS message identifier"
+      }
+    },
+    "required": ["queued"],
+    "additionalProperties": false
+  }
+}

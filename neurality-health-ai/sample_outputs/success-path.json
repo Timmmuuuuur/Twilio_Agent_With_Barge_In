@@ -1,0 +1,149 @@
+{
+  "call_id": "550e8400-e29b-41d4-a716-446655440001",
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, I'm Maya Patel. Do you take Delta Dental PPO for a cleaning?",
+      "ts": "2025-10-28T18:30:00.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Yes, we do accept Delta Dental PPO! A cleaning is covered with an estimated $25 copay. What day works for you?",
+      "ts": "2025-10-28T18:30:02.500Z"
+    },
+    {
+      "role": "user",
+      "text": "Next Tuesday morning in San Jose. My number is 408-555-1234.",
+      "ts": "2025-10-28T18:30:08.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "I have Tuesday morning slots at 9am, 11am, and 1pm at our San Jose office. Which time works best?",
+      "ts": "2025-10-28T18:30:11.200Z"
+    },
+    {
+      "role": "user",
+      "text": "9am would be perfect.",
+      "ts": "2025-10-28T18:30:15.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Great! I've booked you for Tuesday at 9am. Your confirmation number is CONF-ABC123. Should I text this to 408-555-1234?",
+      "ts": "2025-10-28T18:30:17.800Z"
+    },
+    {
+      "role": "user",
+      "text": "Yes please!",
+      "ts": "2025-10-28T18:30:20.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Done! You'll receive a confirmation text shortly. See you Tuesday!",
+      "ts": "2025-10-28T18:30:22.100Z"
+    }
+  ],
+  "intents": [
+    "coverage_check",
+    "availability",
+    "book_appointment",
+    "send_sms"
+  ],
+  "slots": {
+    "patient_first": "Maya",
+    "patient_last": "Patel",
+    "phone": "+14085551234",
+    "payer": "Delta Dental",
+    "plan": "PPO",
+    "appointment_type": "cleaning",
+    "time_pref": "morning",
+    "location_id": "sj-001"
+  },
+  "tool_trace": [
+    {
+      "tool": "check_insurance_coverage",
+      "input": {
+        "payer": "Delta Dental",
+        "plan": "PPO",
+        "procedure_code": "D1110"
+      },
+      "output": {
+        "covered": true,
+        "copay_estimate": 25,
+        "notes": "Covered under preventive care"
+      },
+      "ok": true
+    },
+    {
+      "tool": "get_provider_availability",
+      "input": {
+        "location_id": "sj-001",
+        "date_range": {
+          "start": "2025-11-04T08:00:00.000Z",
+          "end": "2025-11-11T17:00:00.000Z"
+        },
+        "appointment_type": "cleaning"
+      },
+      "output": {
+        "slots": [
+          {
+            "start": "2025-11-04T09:00:00.000Z",
+            "end": "2025-11-04T10:00:00.000Z",
+            "provider_id": "DR001"
+          },
+          {
+            "start": "2025-11-04T11:00:00.000Z",
+            "end": "2025-11-04T12:00:00.000Z",
+            "provider_id": "DR001"
+          },
+          {
+            "start": "2025-11-04T13:00:00.000Z",
+            "end": "2025-11-04T14:00:00.000Z",
+            "provider_id": "DR002"
+          }
+        ]
+      },
+      "ok": true
+    },
+    {
+      "tool": "book_appointment",
+      "input": {
+        "patient": {
+          "first": "Maya",
+          "last": "Patel",
+          "phone": "+14085551234"
+        },
+        "provider_id": "DR001",
+        "slot": {
+          "start": "2025-11-04T09:00:00.000Z",
+          "end": "2025-11-04T10:00:00.000Z"
+        },
+        "appointment_type": "cleaning",
+        "location_id": "sj-001",
+        "idempotency_key": "550e8400-maya-patel-20251104-09"
+      },
+      "output": {
+        "confirmation_id": "CONF-ABC123",
+        "status": "booked"
+      },
+      "ok": true
+    },
+    {
+      "tool": "send_sms",
+      "input": {
+        "to": "+14085551234",
+        "message": "Neurality Health: Your cleaning appointment is confirmed for Tuesday, Nov 4 at 9:00 AM at our San Jose office. Confirmation: CONF-ABC123"
+      },
+      "output": {
+        "queued": true,
+        "message_id": "SM1234567890AB"
+      },
+      "ok": true
+    }
+  ],
+  "outcome": {
+    "booked": true,
+    "confirmation_id": "CONF-ABC123",
+    "next_steps": "SMS sent"
+  }
+}
+

@@ -1,0 +1,7 @@
+{
+  "version": "v1.0",
+  "coverage_check": "Prompt for insurance coverage",
+  "availability": "Prompt for provider availability",
+  "booking": "Prompt for booking appointment",
+  "sms": "Prompt for sending SMS"
+}

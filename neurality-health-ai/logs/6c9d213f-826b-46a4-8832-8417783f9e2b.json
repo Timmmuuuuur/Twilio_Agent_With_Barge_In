@@ -1,0 +1,12 @@
+{
+  "call_id": "6c9d213f-826b-46a4-8832-8417783f9e2b",
+  "transcript": [],
+  "intents": [],
+  "slots": {},
+  "tool_trace": [],
+  "outcome": {
+    "booked": false,
+    "confirmation_id": null,
+    "next_steps": "Pending"
+  }
+}

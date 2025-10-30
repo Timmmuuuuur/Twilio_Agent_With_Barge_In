@@ -1,0 +1,70 @@
+{
+  "call_id": "660f9511-f3ac-42e5-b827-557766551002",
+  "transcript": [
+    {
+      "role": "user",
+      "text": "Hi, do you take UnitedHealthcare for a root canal?",
+      "ts": "2025-10-28T19:15:00.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Let me check that for you. Unfortunately, UnitedHealthcare is not in our network for that procedure. Cash pay is available at $800-1200.",
+      "ts": "2025-10-28T19:15:03.200Z"
+    },
+    {
+      "role": "user",
+      "text": "That's expensive. Are there any payment plans?",
+      "ts": "2025-10-28T19:15:08.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Yes, we offer payment plans through CareCredit with 0% interest for 12 months. Would you like more information?",
+      "ts": "2025-10-28T19:15:10.500Z"
+    },
+    {
+      "role": "user",
+      "text": "Let me think about it and call back later.",
+      "ts": "2025-10-28T19:15:15.000Z"
+    },
+    {
+      "role": "agent",
+      "text": "Of course! Feel free to call us back anytime. Have a great day!",
+      "ts": "2025-10-28T19:15:17.100Z"
+    }
+  ],
+  "intents": [
+    "coverage_check"
+  ],
+  "slots": {
+    "payer": "UnitedHealthcare",
+    "plan": null,
+    "appointment_type": "root_canal",
+    "patient_first": null,
+    "patient_last": null,
+    "phone": null,
+    "location_id": null,
+    "time_pref": null
+  },
+  "tool_trace": [
+    {
+      "tool": "check_insurance_coverage",
+      "input": {
+        "payer": "UnitedHealthcare",
+        "plan": "PPO",
+        "procedure_code": "D3310"
+      },
+      "output": {
+        "covered": false,
+        "copay_estimate": 0,
+        "notes": "Not in network - cash pay available"
+      },
+      "ok": true
+    }
+  ],
+  "outcome": {
+    "booked": false,
+    "confirmation_id": null,
+    "next_steps": "Caller requested time to consider options"
+  }
+}
+
